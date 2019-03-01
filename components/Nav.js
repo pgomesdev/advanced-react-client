@@ -27,10 +27,10 @@ const Nav = () => (
             </Link>
             <SignOut />
             <Mutation mutation={TOGGLE_CART_MUTATION}>
-              {(toggleCart) => (
+              {(toggleCart, { loading }) => (
                 <button type='button' onClick={toggleCart}>
                   My Cart
-                  <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)} />
+                  {!loading && <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)} />}
                 </button>
               )}
             </Mutation>
