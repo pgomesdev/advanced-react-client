@@ -61,7 +61,7 @@ const CartCount = ({ count }) => (
 )
 
 CartCount.propTypes = {
-  count: PropTypes.float,
+  count: PropTypes.number,
 }
 
 export default CartCount

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import { Mutation } from 'react-apollo'
+import Router from 'next/router'
 import NProgress from 'nprogress'
 import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
@@ -28,13 +29,18 @@ function totalItems(cart) {
 
 class TakeMyMoney extends Component {
   onToken = async (res, createOrder) => {
+    NProgress.start()
+
     const order = await createOrder({
       variables: {
         token: res.id,
       },
     })
 
-    console.log(order)
+    Router.push({
+      pathname: '/order',
+      query: { id: order.data.createOrder.id }
+    })
   }
 
   render() {
