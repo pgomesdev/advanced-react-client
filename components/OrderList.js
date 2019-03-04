@@ -28,7 +28,7 @@ const ORDERS_QUERY = gql`
 `
 
 const OrderUl = styled.ul`
-  disaply: grid;
+  display: grid;
   grid-gap: 4rem;
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
 `
