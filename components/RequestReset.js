@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import Form from './styles/Form'
 import ErrorMessage from './ErrorMessage'
 
-const REQUEST_RESET_MUTATION = gql`
+export const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION(
     $email: String!
   ) {
@@ -37,13 +37,16 @@ class RequestReset extends Component {
       >
         {(requestReset, { error, loading, called }) => {
           return (
-            <Form method='POST' onSubmit={async (e) => {
-              e.preventDefault()
+            <Form
+              method='POST'
+              data-test='form'
+              onSubmit={async (e) => {
+                e.preventDefault()
 
-              await requestReset()
+                await requestReset()
 
-              this.setState(() => ({
-                email: '',
+                this.setState(() => ({
+                  email: '',
               }))
             }}>
               <fieldset disabled={loading} aria-busy={loading}>
