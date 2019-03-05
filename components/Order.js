@@ -8,7 +8,7 @@ import formatMoney from '../lib/formatMoney'
 import ErrorMessage from './ErrorMessage'
 import OrderStyles from './styles/OrderStyles'
 
-const ORDER_QUERY = gql`
+export const ORDER_QUERY = gql`
   query ORDER_QUERY($id: ID!) {
     order(id: $id) {
       id
@@ -49,7 +49,7 @@ class Order extends Component {
           const { order } = data
 
           return (
-            <OrderStyles>
+            <OrderStyles data-test='order'>
               <Head>
                 <title> Sick Fits - Order {id}</title>
               </Head>

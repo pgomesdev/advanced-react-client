@@ -1,0 +1,32 @@
+import { mount } from 'enzyme'
+import toJSON from 'enzyme-to-json'
+import wait from 'waait'
+import { MockedProvider } from 'react-apollo/test-utils'
+import Order, { ORDER_QUERY } from '../components/Order'
+import { fakeOrder } from '../lib/testUtils'
+
+describe('<Order />', () => {
+  const mocks = [
+    {
+      request: { query: ORDER_QUERY, variables: { id: 'ord123' } },
+      result: {
+        data: {
+          order: fakeOrder(),
+        },
+      },
+    }
+  ]
+  it('renders and matches snapshot', async () => {
+    const wrapper = mount(
+      <MockedProvider mocks={mocks}>
+        <Order id='ord123' />
+      </MockedProvider>
+    )
+
+    await wait()
+
+    wrapper.update()
+
+    expect(toJSON(wrapper.find('div[data-test="order"]'))).toMatchSnapshot()
+  });
+});
