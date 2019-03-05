@@ -15,7 +15,7 @@ const BigButton = styled.button`
   }
 `
 
-const REMOVE_FROM_CART_MUTATION = gql`
+export const REMOVE_FROM_CART_MUTATION = gql`
   mutation REMOVE_FROM_CART_MUTATION($id: ID!) {
     removeFromCart(id: $id) {
       id
@@ -30,7 +30,6 @@ class RemoveFromCart extends Component {
 
   // This gets called as soon as we get a response back from the server after a mutation has been performed
   update = (cache, payload) => {
-    console.log('running remove from cart')
     // first read the cache
     const data = cache.readQuery({ query: CURRENT_USER_QUERY })
 
@@ -48,9 +47,6 @@ class RemoveFromCart extends Component {
       <Mutation
         mutation={REMOVE_FROM_CART_MUTATION}
         variables={this.props}
-        refetchQueries={[
-          { query: CURRENT_USER_QUERY }
-        ]}
         update={this.update}
         optimisticResponse={{
           __typename: 'Mutation',
